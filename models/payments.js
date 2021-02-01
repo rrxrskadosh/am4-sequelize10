@@ -4,18 +4,20 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class payments extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+     //Relación y Asociación de UNO a Muchos (Payments pertenece a Clients y Memberships)
+      this.belongsTo(models.clients, {
+        //Identificando la llave foranea de la relación
+        foreingKey: "client_id"
+      });
+      this.belongsTo(models.memberships, {
+        foreingKey: "membership_id"
+      });
     }
   };
   payments.init({
-    membership_id: DataTypes.INTEGER,
     client_id: DataTypes.INTEGER,
+    membership_id: DataTypes.INTEGER,
     amount: DataTypes.NUMERIC,
     payment_date: DataTypes.DATE
   }, {

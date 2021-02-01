@@ -4,13 +4,18 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class clients extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.hasMany(models.payments, {
+        //Relación de uno a Muchos de Clients a Classes
+        //Identificando la llave foranea de la relación
+        foreignKey: "client_id"
+      });
+      this.belongsToMany(models.classes, {
+        //Relación de Muchos a Muchos de Clients a Classes
+        //Identificando la llave foranea de la relación
+        through: "clients_classes",
+        foreignKey: "class_id"
+      });
     }
   };
   clients.init({
