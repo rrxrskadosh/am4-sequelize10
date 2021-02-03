@@ -8,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      //Relación y Asociación de UNO a Muchos (Payments pertenece a Clients y Memberships)
       this.belongsTo(models.clients, {
         //Identificando la llave foranea de la relación
-        foreingKey: "client_id"
+        foreignKey: "client_id"
       });
       this.belongsTo(models.memberships, {
-        foreingKey: "membership_id"
+        foreignKey: "membership_id"
       });
     }
   };
